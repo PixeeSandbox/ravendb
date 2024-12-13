@@ -1,6 +1,6 @@
 from locust import HttpLocust, TaskSet, task
 import json
-import random
+import secrets
 
 class UserBehavior(TaskSet):
     def __init__(self, *args, **kwargs):
@@ -9,7 +9,7 @@ class UserBehavior(TaskSet):
 
     @task(5)
     def write(self):
-        num = random.randint(0, 8500) + 1000
+        num = secrets.SystemRandom().randint(0, 8500) + 1000
         headers = {'content-type': 'application/json'}
         document = {"Name": "Fitzchak {0}".format(num), "Supplier": 1, "Category": 1, "QuantityPerUnit": 1,
                     "PricePerUnit": 1,
@@ -20,7 +20,7 @@ class UserBehavior(TaskSet):
 
     @task(2)
     def query(self):
-        num = random.randint(0, 8500) + 1000
+        num = secrets.SystemRandom().randint(0, 8500) + 1000
         headers = {'content-type': 'application/json'}
         document = {"Query": "FROM Benchmarks WHERE Name = $p0",
                     "QueryParameters": {"p0": "Fitzchak {0}".format(num)}}
@@ -29,7 +29,7 @@ class UserBehavior(TaskSet):
 
     @task(1)
     def read(self):
-        num = random.randint(0, 8500) + 1000
+        num = secrets.SystemRandom().randint(0, 8500) + 1000
         self.client.get("/databases/BenchmarkDB/docs?id=temp/000000000000000{0}-A".format(num), cert=self.cert_path, name="/databases/BenchmarkDB/docs?id=[id]")
 
 
