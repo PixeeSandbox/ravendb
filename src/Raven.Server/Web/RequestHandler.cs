@@ -366,7 +366,7 @@ namespace Raven.Server.Web
                 return null;
             }
 
-            return val[0];
+            return System.Text.RegularExpressions.Regex.Replace(val[0], "[^a-zA-Z0-9]", "");
         }
 
         internal char? GetCharQueryString(string name, bool required = true)
