@@ -17,7 +17,6 @@ using Raven.Server.Web.Studio.Processors;
 using Sparrow.Json;
 using Sparrow.Json.Parsing;
 using Voron.Util.Settings;
-
 namespace Raven.Server.Web.Studio
 {
     public sealed class StudioTasksHandler : ServerRequestHandler
@@ -27,6 +26,14 @@ namespace Raven.Server.Web.Studio
         public async Task FullDataDirectory()
         {
             var path = GetStringQueryString("path", required: false);
+            if (!string.IsNullOrEmpty(path))
+            {
+                path = Path.GetFullPath(path);
+                if (!path.StartsWith(ServerStore.Configuration.Core.DataDirectory.FullPath))
+                {
+                    throw new InvalidOperationException("Invalid path");
+                }
+            }
             var name = GetStringQueryString("name", required: false);
             var requestTimeoutInMs = GetIntValueQueryString("requestTimeoutInMs", required: false) ?? 5 * 1000;
 
