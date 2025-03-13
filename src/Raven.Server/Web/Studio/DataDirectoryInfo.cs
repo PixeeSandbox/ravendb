@@ -38,12 +38,17 @@ namespace Raven.Server.Web.Studio
             bool getNodesInfo, int requestTimeoutInMs, Stream responseBodyStream)
         {
             _serverStore = serverStore;
-            _path = path;
+            _path = SanitizePath(path);
             _name = name;
             _isBackup = isBackup;
             _getNodesInfo = getNodesInfo;
             _requestTimeoutInMs = requestTimeoutInMs;
             _responseBodyStream = responseBodyStream;
+        }
+
+        private string SanitizePath(string path)
+        {
+            return Path.GetFileName(path);
         }
 
         public async Task UpdateDirectoryResult(string databaseName, string error)
