@@ -104,7 +104,7 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
-        "@reduxjs/toolkit": "^2.2.6",
+        "@reduxjs/toolkit": "^2.8.2",
         "@testing-library/dom": "^10.3.1",
         "@types/eonasdan-bootstrap-datetimepicker": "^4.17.32",
         "@types/react-datepicker": "^6.2.0",
