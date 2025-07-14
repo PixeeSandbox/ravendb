@@ -156,7 +156,7 @@
         "react-redux": "^9.1.2",
         "react-select": "^5.8.0",
         "reactstrap": "^9.2.2",
-        "sortablejs": "^1.15.2",
+        "sortablejs": "^1.15.6",
         "style-loader": "^4.0.0",
         "toastr": "^2.1.4",
         "util": "^0.12.5",
