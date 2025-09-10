@@ -88,6 +88,7 @@ namespace Raven.Client.ServerWide.Operations.Migration
         internal static void ValidateExporterPath(string dataExporterPath)
         {
             var effectivePath = EffectiveDataExporterFullPath(dataExporterPath);
+            if (effectivePath.Contains("..")) throw new BadRequestException("Invalid exporter path.");
 
             if (File.Exists(effectivePath) == false)
                 throw new FileNotFoundException($"Could not find file {StorageExporterExecutable} at given location");
